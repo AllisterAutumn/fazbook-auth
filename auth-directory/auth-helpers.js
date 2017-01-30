@@ -29,4 +29,21 @@ function createUser(req, res) {
         res.redirect('/');
     });
 }
+
+
 //This ^  categorizes all the data recieved from the ejs form and stores them in a database
+
+function loginRequired(req, res, next) {
+    if (!req.user) return res.status(401).json({ status: 'Please log in' });
+
+    return next();
+}
+
+module.exports = {
+        comparePass,
+        loginRedirect,
+        loginRequired,
+        createUser
+    }
+    //This code is the sister code to the 'loginredirect' code up there. If they are not logged in
+    //and on this page they will be redirected and told to 'Please log in'
