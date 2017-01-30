@@ -1,6 +1,8 @@
 const passport = require('passport');
 const models = require('../db/models/index');
-//It uses a middleware called passport to serialize and deserialize data
+//Passport is a middleware that streamlines authentication and keeps it all clean and encapsulated
+
+
 
 module.exports = () => {
     passport.serializeUser((user, done) => {

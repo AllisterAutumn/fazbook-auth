@@ -4,7 +4,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const init = require('./passport');
 const models = require('../db/models/index');
 const authHelpers = require('../auth/auth-helpers');
-
+//Passport is a middleware that streamlines authentication and keeps it all clean and encapsulated
 const options = {};
 
 init();
@@ -20,6 +20,8 @@ passport.use(new LocalStrategy(options, (username, password, done) => {
             if (user[0] === undefined) {
                 return done(null, false);
             }
+            //This code compares the right password with the input and says if it doesn't match return false,
+            //and if it does go to that users data.
             if (!authHelpers.comparePass(password, user[0].dataValues.password)) {
                 return done(null, false);
             } else {
@@ -27,7 +29,8 @@ passport.use(new LocalStrategy(options, (username, password, done) => {
             }
         })
         .catch((err) => {
-            return done(err); });
+            return done(err);
+        });
 }));
 
 module.exports = passport;
